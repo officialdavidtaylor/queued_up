@@ -16,6 +16,7 @@ const InputSingleDigit = ({ key, eventHandler }) => {
       w='50px'
       h='80px'
       fontSize='5xl'
+      inputMode='numeric'
       value={value}
       onChange={(e) => eventHandler(e, setIsValid, setValue)}
     />
