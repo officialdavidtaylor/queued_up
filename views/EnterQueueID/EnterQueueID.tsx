@@ -15,6 +15,7 @@ const handleSubmit = (event, n) => {
 
   if (inputString.length == n) {
     console.log(inputString);
+    // TODO: Do something with this inputString.
   }
   else {
     alert('It looks like the input is incomplete. Please try again.')
@@ -35,7 +36,7 @@ const EnterQueueID = () => {
       <Heading
         as='h1'
         size='4xl'
-        marginBottom='20vh'
+        marginBottom='15vh'
       >
         <Text>Enter Queue ID:</Text>
       </Heading>
