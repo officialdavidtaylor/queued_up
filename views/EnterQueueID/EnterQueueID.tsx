@@ -1,13 +1,22 @@
 import { Flex, Heading, Text } from '@chakra-ui/react'
 import { useRouter } from 'next/router';
 import ButtonJoinQueue from '../../components/ButtonJoinQueue';
+import FlexViewContainer from '../../components/FlexViewContainer';
 import InputNDigitCode from '../../components/InputNDigitCode';
+
+// View:
+//  EnterQueueID
+// Desc:
+//  This view is where the 6-digit code is collected from the user.
+//  Upon entry, Apollo Client will be used to ensure the queue code is valid,
+//  then a new record will be made in the User-Queue Intersection table. After
+//  this is completed, the user will be routed to the position page.
 
 const EnterQueueID = () => {
 
   const router = useRouter()
 
-  const BASE_HREF = '/confirmation/';
+  const BASE_HREF = '/position/';
   const CODE_DIGIT_COUNT = 6;
 
   const handleSubmit = (event, n) => {
@@ -30,12 +39,7 @@ const EnterQueueID = () => {
   };
 
   return (
-    <Flex
-      h='100vh'
-      direction='column'
-      align='center'
-      justifyContent='center'
-    >
+    <FlexViewContainer>
       <Heading
         as='h1'
         size='4xl'
@@ -53,7 +57,7 @@ const EnterQueueID = () => {
           <ButtonJoinQueue text='Join!' />
         </form>
       </Flex>
-    </Flex>
+    </FlexViewContainer>
   );
 };
 

@@ -1,15 +1,11 @@
 import { Flex, Heading, Kbd, Text } from '@chakra-ui/react'
 import ButtonCreateQueue from '../../components/ButtonCreateQueue';
 import ButtonWelcomeScreen from '../../components/ButtonWelcomeScreen';
+import FlexViewContainer from '../../components/FlexViewContainer';
 
 const WelcomeScreen = () => {
   return (
-    <Flex
-      h='100vh'
-      direction='column'
-      align='center'
-      justifyContent='center'
-    >
+    <FlexViewContainer>
       <Heading
         as='h1'
         size='4xl'
@@ -23,7 +19,7 @@ const WelcomeScreen = () => {
         <ButtonWelcomeScreen text='Join Queue' href='/join' />
         <ButtonCreateQueue />
       </Flex>
-    </Flex>
+    </FlexViewContainer>
   );
 };
 

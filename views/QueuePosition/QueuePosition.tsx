@@ -2,6 +2,7 @@ import { gql, useQuery } from "@apollo/client";
 import { Flex, Heading, Text } from "@chakra-ui/react";
 import { useEffect, useRef } from "react";
 import ButtonLeaveQueue from "../../components/ButtonLeaveQueue";
+import FlexViewContainer from "../../components/FlexViewContainer";
 
 interface QueuePositionProps {
   queueId: string,
@@ -44,25 +45,20 @@ const QueuePosition: React.FC<QueuePositionProps> = (props) => {
     userId.current = localStorage.getItem('QueuedUpUserId');
   }, []);
 
-  // FIXME: The Current Position feature isn't working :(
-  useEffect(() => {
-    if (!loading && (userId.current !== '')) {
-      linePosition.current = data["queue_user_intersection"].reduce((acc, element, index) => {
-        if (element.user_id == userId.current) {
-          acc = index;
-        };
-        return acc;
-      }, [Number.POSITIVE_INFINITY])
-    };
-  }, [loading, data, userId])
+  if (!loading && (userId.current !== '')) {
+    linePosition.current = data.queue_user_intersection.reduce((acc: Number, element: any, index: Number) => {
+      if (element.user_id == userId.current) {
+        acc = index;
+      };
+      return acc;
+    }, [Number.POSITIVE_INFINITY])
+  };
+
+  // FIXME: This isn't very elegant
+  if (loading) return (<p>loading</p>);
 
   return (
-    <Flex
-      h='100vh'
-      direction='column'
-      align='center'
-      justifyContent='center'
-    >
+    <FlexViewContainer>
       <Heading
         as='h1'
         size='4xl'
@@ -83,7 +79,7 @@ const QueuePosition: React.FC<QueuePositionProps> = (props) => {
       >
         <ButtonLeaveQueue text='Leave Queue' />
       </Flex>
-    </Flex>
+    </FlexViewContainer>
   );
 };
 
