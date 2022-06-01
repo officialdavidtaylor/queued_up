@@ -1,8 +1,22 @@
+import { useEffect } from 'react';
+
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import WelcomeScreen from '../views/WelcomeScreen'
 
 export default function Home() {
+
+  useEffect(() => {
+    let userName = localStorage.getItem('QueuedUpUserName');
+    let userId = localStorage.getItem('QueuedUpUserId');
+
+    if (!userName || !userId) {
+      alert('No username or id found!');
+      localStorage.setItem('QueuedUpUserId', 'dd654c9f-4433-4ea9-8793-46e39864f1a3');
+      localStorage.setItem('QueuedUpUserName', 'David');
+    };
+  }, [])
+
   return (
     <div className={styles.container}>
       <Head>

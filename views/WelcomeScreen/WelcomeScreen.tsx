@@ -1,4 +1,5 @@
 import { Flex, Heading, Kbd, Text } from '@chakra-ui/react'
+import ButtonCreateQueue from '../../components/ButtonCreateQueue';
 import ButtonWelcomeScreen from '../../components/ButtonWelcomeScreen';
 
 const WelcomeScreen = () => {
@@ -20,7 +21,7 @@ const WelcomeScreen = () => {
         direction='column'
       >
         <ButtonWelcomeScreen text='Join Queue' href='/join' />
-        <ButtonWelcomeScreen text='Create Queue' href='/create' />
+        <ButtonCreateQueue />
       </Flex>
     </Flex>
   );

@@ -1,30 +1,33 @@
 import { Flex, Heading, Text } from '@chakra-ui/react'
+import { useRouter } from 'next/router';
 import ButtonJoinQueue from '../../components/ButtonJoinQueue';
 import InputNDigitCode from '../../components/InputNDigitCode';
 
-const handleSubmit = (event, n) => {
-
-  event.preventDefault();
-
-  const inputs = event.target.elements;
-  let inputString = '';
-
-  for (let i = 0; i < n; i++) {
-    inputString += inputs[i].value;
-  }
-
-  if (inputString.length == n) {
-    console.log(inputString);
-    // TODO: Do something with this inputString.
-  }
-  else {
-    alert('It looks like the input is incomplete. Please try again.')
-  }
-};
-
 const EnterQueueID = () => {
 
-  const CODE_DIGITS = 6;
+  const router = useRouter()
+
+  const BASE_HREF = '/confirmation/';
+  const CODE_DIGIT_COUNT = 6;
+
+  const handleSubmit = (event, n) => {
+
+    event.preventDefault();
+
+    const inputs = event.target.elements;
+    let inputString = '';
+
+    for (let i = 0; i < n; i++) {
+      inputString += inputs[i].value;
+    }
+
+    if (inputString.length == n) {
+      router.push(BASE_HREF + inputString)
+    }
+    else {
+      alert('It looks like the input is incomplete. Please try again.')
+    }
+  };
 
   return (
     <Flex
@@ -44,9 +47,9 @@ const EnterQueueID = () => {
         direction='column'
       >
         <form
-          onSubmit={(e) => handleSubmit(e, CODE_DIGITS)}
+          onSubmit={(e) => handleSubmit(e, CODE_DIGIT_COUNT)}
         >
-          <InputNDigitCode n={CODE_DIGITS} />
+          <InputNDigitCode n={CODE_DIGIT_COUNT} />
           <ButtonJoinQueue text='Join!' />
         </form>
       </Flex>
