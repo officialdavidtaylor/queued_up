@@ -42,7 +42,7 @@ const ButtonLeaveQueue: React.FC<ButtonLeaveQueueProps> = ({ text, queueId, user
     removeUser({
       variables: {
         'queue_id': queueId,
-        'user_id': userIdRef,
+        'user_id': userIdRef.current,
       }
     });
   };
