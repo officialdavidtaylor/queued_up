@@ -3,14 +3,33 @@ import { useRouter } from 'next/router';
 import Head from 'next/head';
 import styles from '../../styles/Home.module.css';
 import QueuePosition from '../../views/QueuePosition';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export default function Position() {
 
   const router = useRouter();
-  const { queueId } = router.query;
+  const [stringQueueId, setStringQueueId] = useState(null); // stringQueueId is the string extracted from stringQueueId
 
   const userId = useRef('');
+
+  useEffect(() => {
+    // test if Next router values are ready, and check that stringQueueId is not null
+    if (router.isReady && (stringQueueId === null)) {
+      // extract the slug from the url path
+      const tempQueueId = router.query.queueId;
+
+      if (typeof tempQueueId === 'string') {
+        setStringQueueId(tempQueueId);
+      }
+      else if (Array.isArray(tempQueueId)) {
+        // set stringQueueId to index 0 because the stringQueueId is the first entry in the slug per requirements
+        setStringQueueId(tempQueueId[0]);
+      }
+      else {
+        alert('NextJS url slug issue encountered :(')
+      }
+    }
+  }, [router, stringQueueId])
 
   useEffect(() => {
     userId.current = localStorage.getItem('QueuedUpUserId');
@@ -24,7 +43,7 @@ export default function Position() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <QueuePosition queueId={queueId} userId={userId.current} />
+      <QueuePosition queueId={stringQueueId} userId={userId.current} isLoading={!router.isReady} />
     </div>
   );
 };

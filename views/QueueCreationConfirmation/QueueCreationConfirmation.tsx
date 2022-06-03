@@ -6,6 +6,12 @@ import FlexViewContainer from '../../components/FlexViewContainer';
 
 import formatIdWithSpace from '../../functions/formatIdWithSpace';
 
+// View:
+//  QueueCreationConfirmation
+// Desc:
+//  This view displays the newly-created Queue ID to the user who created it.
+//  Buttons allow the user to either "Manage" or "Share" the Queue ID.
+
 interface QueueCreationConfirmationProps {
   queueId: string,
 };
@@ -34,7 +40,7 @@ const QueueCreationConfirmation: React.FC<QueueCreationConfirmationProps> = (pro
       <Flex
         direction='column'
       >
-        <ButtonConfirmationScreen text='Manage Queue' href='/manage' />
+        <ButtonConfirmationScreen text='Manage Queue' href={`/manage/${props.queueId}`} />
         <ButtonShareQueueId queueId={props.queueId} />
       </Flex>
     </FlexViewContainer>

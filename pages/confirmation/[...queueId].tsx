@@ -3,11 +3,32 @@ import { useRouter } from 'next/router'
 import Head from 'next/head'
 import styles from '../../styles/Home.module.css'
 import QueueCreationConfirmation from '../../views/QueueCreationConfirmation';
+import { useEffect, useState } from 'react';
 
 export default function ConfirmQueue() {
 
   const router = useRouter()
-  const { queueId } = router.query
+
+  const [stringQueueId, setStringQueueId] = useState(null); // stringQueueId is the string extracted from stringQueueId
+
+  useEffect(() => {
+    // test if Next router values are ready, and check that stringQueueId is not null
+    if (router.isReady && (stringQueueId === null)) {
+      // extract the slug from the url path
+      const tempQueueId = router.query.queueId;
+
+      if (typeof tempQueueId === 'string') {
+        setStringQueueId(tempQueueId);
+      }
+      else if (Array.isArray(tempQueueId)) {
+        // set stringQueueId to index 0 because the stringQueueId is the first entry in the slug per requirements
+        setStringQueueId(tempQueueId[0]);
+      }
+      else {
+        alert('NextJS url slug issue encountered :(')
+      }
+    }
+  }, [router, stringQueueId])
 
   return (
     <div className={styles.container}>
@@ -17,7 +38,7 @@ export default function ConfirmQueue() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <QueueCreationConfirmation queueId={queueId[0]} />
+      <QueueCreationConfirmation queueId={stringQueueId} />
     </div>
   );
 };

@@ -2,10 +2,12 @@
 const formatIdWithSpace = (id: string) => {
 
   let returnVal = null;
-
-  if (id.length === 6) {
-    returnVal = (id.slice(0, 3) + ' ' + id.slice(3))
+  try {
+    if (id.length === 6) {
+      returnVal = (id.slice(0, 3) + ' ' + id.slice(3))
+    }
   }
+  catch { };
 
   return returnVal;
 };
