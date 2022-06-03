@@ -26,7 +26,7 @@ export default function JoinByLink() {
   const router = useRouter();
   const [stringQueueId, setStringQueueId] = useState(null); // stringQueueId is the string extracted from stringQueueId
 
-  const userId = useRef('');
+  const userId = useRef(null);
   const POSITION_HREF = '/position/';
 
   useEffect(() => {
@@ -49,8 +49,13 @@ export default function JoinByLink() {
   }, [router, stringQueueId])
 
   useEffect(() => {
-    userId.current = localStorage.getItem('QueuedUpUserId');
-  }, []);
+    if (localStorage.getItem('QueuedUpUserId')) {
+      userId.current = localStorage.getItem('QueuedUpUserId');
+    }
+    else {
+      router.push('/signin')
+    }
+  }, [userId, router]);
 
   const [joinQueue, { data, loading, error }] = useMutation(JOIN_QUEUE);
 
@@ -73,7 +78,7 @@ export default function JoinByLink() {
       joinQueue({
         variables: {
           'queue_id': stringQueueId,
-          'user_id': localStorage.getItem('QueuedUpUserId'),
+          'user_id': userId.current,
         },
         onError: onMutationError,
       });
