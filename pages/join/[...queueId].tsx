@@ -54,7 +54,7 @@ export default function JoinByLink() {
 
   const [joinQueue, { data, loading, error }] = useMutation(JOIN_QUEUE);
 
-  const onMutationError = (error: ApolloError) => {
+  const onMutationError = (error) => {
     // if the error is a constraint-violation, it is likely because the user is already in the queue.
     if (error.graphQLErrors[0].extensions.code === 'constraint-violation') {
       // put them through to the position page!
