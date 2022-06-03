@@ -1,7 +1,7 @@
 import { gql, useMutation } from "@apollo/client";
 import { Button } from "@chakra-ui/react"
 import { useRouter } from 'next/router';
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 interface ButtonLeaveQueueProps {
   text: string,
@@ -23,20 +23,26 @@ const REMOVE_USER_FROM_QUEUE = gql`
 const ButtonLeaveQueue: React.FC<ButtonLeaveQueueProps> = ({ text, queueId, userId, isLoading, w, href }) => {
 
   const router = useRouter();
+  const userIdRef = useRef(null);
 
   const [removeUser, { data, loading, error }] = useMutation(REMOVE_USER_FROM_QUEUE);
 
   // userId can optionally be passed from the parent element
   // if this value is not retrieved from the parent, retreive it from localStorage
-  if (!userId) {
-    userId = localStorage.getItem('QueuedUpUserId');
-  }
+  useEffect(() => {
+    if (!userId) {
+      userIdRef.current = localStorage.getItem('QueuedUpUserId');
+    }
+    else {
+      userIdRef.current = userId;
+    };
+  });
 
   const handleClick = () => {
     removeUser({
       variables: {
         'queue_id': queueId,
-        'user_id': userId,
+        'user_id': userIdRef,
       }
     });
   };
