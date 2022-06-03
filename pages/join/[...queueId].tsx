@@ -48,15 +48,6 @@ export default function JoinByLink() {
     }
   }, [router, stringQueueId])
 
-  useEffect(() => {
-    if (localStorage.getItem('QueuedUpUserId')) {
-      userId.current = localStorage.getItem('QueuedUpUserId');
-    }
-    else {
-      router.push('/signin')
-    }
-  }, [userId, router]);
-
   const [joinQueue, { data, loading, error }] = useMutation(JOIN_QUEUE);
 
   const onMutationError = (error) => {
@@ -72,6 +63,13 @@ export default function JoinByLink() {
   };
 
   useEffect(() => {
+    // ensure userId is in localStorage, else route the user to the signin page
+    if (localStorage.getItem('QueuedUpUserId')) {
+      userId.current = localStorage.getItem('QueuedUpUserId');
+    }
+    else {
+      router.push('/signin')
+    };
     // ensure string is correct length
     if (stringQueueId) {
       // mutate the database to add user/queue intersection
