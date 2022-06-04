@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Heading } from '@chakra-ui/react';
 import { gql, useMutation } from '@apollo/client';
 
@@ -26,8 +26,18 @@ export default function JoinByLink() {
   const router = useRouter();
   const [stringQueueId, setStringQueueId] = useState(null); // stringQueueId is the string extracted from stringQueueId
 
-  const userId = useRef(null);
+  const [userId, setUserId] = useState(null);
   const POSITION_HREF = '/position/';
+
+  // validate that the user has an account before running any other code
+  useEffect(() => {
+    if (localStorage.getItem('QueuedUpUserId')) {
+      setUserId(localStorage.getItem('QueuedUpUserId'));
+    }
+    else {
+      router.push('/signin')
+    };
+  }, [router, userId]);
 
   useEffect(() => {
     // test if Next router values are ready, and check that stringQueueId is not null
@@ -63,20 +73,13 @@ export default function JoinByLink() {
   };
 
   useEffect(() => {
-    // ensure userId is in localStorage, else route the user to the signin page
-    if (localStorage.getItem('QueuedUpUserId')) {
-      userId.current = localStorage.getItem('QueuedUpUserId');
-    }
-    else {
-      router.push('/signin')
-    };
     // ensure string is correct length
-    if (stringQueueId) {
+    if (stringQueueId && userId) {
       // mutate the database to add user/queue intersection
       joinQueue({
         variables: {
           'queue_id': stringQueueId,
-          'user_id': userId.current,
+          'user_id': userId,
         },
         onError: onMutationError,
       });
