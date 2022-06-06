@@ -9,7 +9,7 @@ const FlexViewContainer: React.FC<FlexProps> = (props) => {
   return (
     <Flex
       minH='100vh'
-      h='-webkit-fit-available'
+      h='-webkit-fill-available'
       direction='column'
       align='center'
       justifyContent='center'
