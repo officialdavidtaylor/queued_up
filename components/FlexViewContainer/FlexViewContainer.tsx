@@ -8,7 +8,8 @@ import { Flex, FlexProps } from "@chakra-ui/react";
 const FlexViewContainer: React.FC<FlexProps> = (props) => {
   return (
     <Flex
-      h='100vh'
+      minH='100vh'
+      h='-webkit-fit-available'
       direction='column'
       align='center'
       justifyContent='center'
