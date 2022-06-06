@@ -20,6 +20,7 @@ const ButtonShareQueueId: React.FC<ButtonShareQueueIdProps> = ({ queueId }) => {
     <Button
       rightIcon={<MdIosShare />}
       marginBottom={4}
+      w='95vw'
       colorScheme='blue'
       size='lg'
       onClick={() => shareAction()}
