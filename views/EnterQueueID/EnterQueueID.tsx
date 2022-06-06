@@ -3,7 +3,6 @@ import { Flex, Heading, Text } from '@chakra-ui/react'
 import { useRouter } from 'next/router';
 import { useEffect, useRef } from 'react';
 import ButtonJoinQueue from '../../components/ButtonJoinQueue';
-import FlexViewContainer from '../../components/FlexViewContainer';
 import InputNDigitCode from '../../components/InputNDigitCode';
 
 // View:
@@ -93,7 +92,7 @@ const EnterQueueID = () => {
   }, [data, loading, error, router, queueIdInput]);
 
   return (
-    <FlexViewContainer>
+    <>
       <Heading
         as='h1'
         size='4xl'
@@ -111,7 +110,7 @@ const EnterQueueID = () => {
           <ButtonJoinQueue isLoading={loading} text='Join!' />
         </form>
       </Flex>
-    </FlexViewContainer>
+    </>
   );
 };
 

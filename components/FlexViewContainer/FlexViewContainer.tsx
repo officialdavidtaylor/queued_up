@@ -13,6 +13,7 @@ const FlexViewContainer: React.FC<FlexProps> = (props) => {
       direction='column'
       align='center'
       justifyContent='center'
+      paddingX='2rem'
     >
       {props.children}
     </Flex>

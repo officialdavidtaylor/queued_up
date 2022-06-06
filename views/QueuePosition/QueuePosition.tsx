@@ -2,7 +2,6 @@ import { gql, useQuery } from "@apollo/client";
 import { Flex, Heading, Skeleton, Spinner, Text } from "@chakra-ui/react";
 import { useEffect, useRef, useState } from "react";
 import ButtonLeaveQueue from "../../components/ButtonLeaveQueue";
-import FlexViewContainer from "../../components/FlexViewContainer";
 import TextQueuePosition from "../../components/TextQueuePosition";
 
 // View:
@@ -76,7 +75,7 @@ const QueuePosition: React.FC<QueuePositionProps> = (props) => {
   }, [linePosition, loading, data]);
 
   return (
-    <FlexViewContainer>
+    <>
       <Heading
         as='h1'
         size='4xl'
@@ -92,7 +91,7 @@ const QueuePosition: React.FC<QueuePositionProps> = (props) => {
       >
         <ButtonLeaveQueue text='Leave Queue' queueId={props.queueId} isLoading={props.isLoading} href='/' />
       </Flex>
-    </FlexViewContainer>
+    </>
   );
 };
 

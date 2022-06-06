@@ -2,7 +2,6 @@ import { gql, useQuery } from "@apollo/client";
 import { Flex, Heading, Text } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import FlexViewContainer from "../../components/FlexViewContainer";
 import QueueEntryCard from "../../components/QueueEntryCard";
 
 // QUERIES
@@ -92,7 +91,7 @@ const QueueManager = () => {
   }, [usersInfo.loading, usersInfo.error, usersInfo.data]);
 
   return (
-    <FlexViewContainer>
+    <>
       <Heading
         as='h1'
         size='4xl'
@@ -110,7 +109,7 @@ const QueueManager = () => {
           );
         })}
       </Flex>
-    </FlexViewContainer>
+    </>
   );
 };
 

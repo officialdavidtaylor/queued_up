@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 
 import Head from 'next/head'
-import styles from '../styles/Home.module.css'
 import WelcomeScreen from '../views/WelcomeScreen'
 import { useRouter } from 'next/router';
 import FlexViewContainer from '../components/FlexViewContainer';

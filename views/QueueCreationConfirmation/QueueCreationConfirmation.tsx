@@ -2,8 +2,6 @@ import { Flex, Heading, Text } from '@chakra-ui/react';
 
 import ButtonConfirmationScreen from '../../components/ButtonConfirmationScreen';
 import ButtonShareQueueId from '../../components/ButtonShareQueueId';
-import FlexViewContainer from '../../components/FlexViewContainer';
-
 import formatIdWithSpace from '../../functions/formatIdWithSpace';
 
 // View:
@@ -19,7 +17,7 @@ interface QueueCreationConfirmationProps {
 const QueueCreationConfirmation: React.FC<QueueCreationConfirmationProps> = (props) => {
 
   return (
-    <FlexViewContainer>
+    <>
       <Heading
         as='h1'
         size='4xl'
@@ -43,7 +41,7 @@ const QueueCreationConfirmation: React.FC<QueueCreationConfirmationProps> = (pro
         <ButtonConfirmationScreen text='Manage Queue' href={`/manage/${props.queueId}`} />
         <ButtonShareQueueId queueId={props.queueId} />
       </Flex>
-    </FlexViewContainer>
+    </>
   );
 };
 

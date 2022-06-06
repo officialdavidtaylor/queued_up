@@ -2,7 +2,6 @@ import { gql, useMutation } from "@apollo/client";
 import { Button, Heading, Input, Text } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useEffect, useRef } from "react";
-import FlexViewContainer from "../../components/FlexViewContainer";
 
 // Create new user in the user database
 const CREATE_NEW_USER = gql`
@@ -52,7 +51,7 @@ const CollectUserInfo = () => {
   }, [data, loading, error, router])
 
   return (
-    <FlexViewContainer>
+    <>
       <Heading
         as='h1'
         size='4xl'
@@ -67,7 +66,7 @@ const CollectUserInfo = () => {
         <Input id='name' placeholder='name' marginY='10px' />
         <Button isLoading={loading} type='submit' colorScheme='blue'>Submit</Button>
       </form>
-    </FlexViewContainer>
+    </>
   );
 };
 
